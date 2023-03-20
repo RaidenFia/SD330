@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>E06: Refrigerator App</title>
+            <meta charset ="utf-8">
+        </head>
+        <body>
+            <style css>
+                .refrigerator {
+                    border: 2px solid gray;
+                    padding: 10px;
+                    margin: 10px;
+                    width: 600px;
+                }
+
+                .refrigerator-controls {
+                    display: flex;
+                    justify-content: space-around;
+                    margin-bottom: 20px;
+                }
+
+                .refrigerator-temp, .refrigerator-inside, .refrigerator-tv, .refrigerator-browser {
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+
+                .refrigerator-tv, .refrigerator-browser {
+                    margin-top: 20px;
+                }               
+
+                .refrigerator-inside img {
+                    width: 300px;
+                    height: 300px;
+                    object-fit: contain;
+                }
+
+                .refrigerator-clock {
+                    text-align: center;
+                    margin-top: 20px;
+                }
+
+            </style>
+
+
+
+
+
+            <div class="refrigerator">
+                <div class="refrigerator-controls">
+                  <button id="on-btn">On</button>
+                  <button id="off-btn">Off</button>
+                </div>
+                <div class="refrigerator-display">
+                  <div class="refrigerator-temp">
+                    <h2>Temperature</h2>
+                    <div id="temp-display"></div>
+                  </div>
+                  <div class="refrigerator-inside">
+                    <h2>Inside the Fridge</h2>
+                    <img id="inside-fridge-display" src="">
+                  </div>
+                  <div class="refrigerator-tv">
+                    <h2>TV</h2>
+                    <div id="tv-display"></div>
+                  </div>
+                  <div class="refrigerator-browser">
+                    <h2>Browser</h2>
+                    <iframe id="browser-display" src="https://www.google.com/"></iframe>
+                  </div>
+                </div>
+                <div class="refrigerator-clock">
+                  <h2>Clock</h2>
+                  <div id="clock-display"></div>
+                </div>
+              </div>
+            
+
+              <hr>
+              <small> &copy; R Fia February 22,2023  </small>
+          </footer>
+          <script>
+            
+            const onBtn = document.getElementById('on-btn');
+            const offBtn = document.getElementById('off-btn');
+            const clockDisplay = document.getElementById('clock-display');
+            const tempDisplay = document.getElementById('temp-display');
+            const insideFridgeDisplay = document.getElementById('inside-fridge-display');
+            const tvDisplay = document.getElementById('tv-display');
+            const browserDisplay = document.getElementById('browser-display');
+
+            
+            onBtn.addEventListener('click', () => {
+            
+            console.log('Refrigerator turned on');
+            });
+
+            offBtn.addEventListener('click', () => {
+            
+            console.log('Refrigerator turned off');
+            });
+
+            
+            function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+
+            
+            setInterval(updateClock, 1000);
+
+            
+            function updateTempDisplay(temp) {
+            tempDisplay.textContent = `${temp}°F`;
+            }
+
+            
+            updateTempDisplay(36);
+
+            
+            function updateInsideFridgeDisplay(imgUrl) {
+            insideFridgeDisplay.src = imgUrl;
+            }
+
+            
+            updateInsideFridgeDisplay('https://grist.org/wp-content/uploads/2015/08/interior-of-refrigerator.jpg');
+
+            
+            function updateTvDisplay(channel) {
+            tvDisplay.textContent = `Channel ${channel}`;
+            }
+
+            
+            updateTvDisplay(12);
+
+            
+            function updateBrowserDisplay(url) {
+            browserDisplay.src = url;
+            }
+
+           
+            updateBrowserDisplay('https://www.google.com/');
+
+          </script>
+              
+
+
+
+        </body>
+
+
+
+</html>
+
