@@ -1,1 +1,54 @@
-<h1> Hello World </h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <title> Raiden Fia SD330</title>
+    </head>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?cs=srgb&dl=pexels-pixabay-235985.jpg&fm=jpg");
+            color: white;
+        }
+    </style>
+    <body onload="fileList()">
+        <div>
+            <img src = "https://images.gofundme.com/LR3jQpii5GA5yH92iK-YxD6J_cQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/49702658_1594931440629722_r.jpeg">
+            <h1 style = "color: white;"> Raiden Fia, SD330 Files.</h1>  
+        </div>
+        <br>
+        <p> My files:</p>
+
+        <p id="files">
+        
+        </p>
+
+    
+            <script>
+            
+             function fileList(){ 
+                (async () => {
+                    const response = await fetch("https://api.github.com/repos/raidenfia/SD330/contents/");
+                    const data = await response.json();
+                
+                    let htmlString = "";
+                    for (let file of data) {
+                        
+                        fname = file.name;           
+                        fpath = "https://raidenfia.github.io/SD330/" + fname;  
+                        
+                        htmlString += "<li><a href=" + "'" + path + "'" + ">" + name + "</a></li>" ;
+                    }
+                
+                    htmlString += '</ul></div>';
+                    document.getElementById('files').innerHTML = htmlString;
+                })()
+            }	
+            </script>
+             <footer>
+                <hr>
+                <p style='text-align:center'></p>
+                <small> &#169 Raiden Fia, 2/3/2023 </small>
+            </footer>
+
+    </body>
+    
