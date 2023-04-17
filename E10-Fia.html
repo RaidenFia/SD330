@@ -1,167 +1,363 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Fridge App - Raiden Fia</title>
+<head>
+	<title>Fridge App</title>
+	<style>
+		#container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center; 
+			align-items: center;
+		}
 
-    <meta charset="utf-8">
+		#left {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 
-    <link rel="stylesheet" href="assets/styles.css">
-  </head>
-  <body>
-    <h1>Freezee</h1>
+		#right {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 
-    <a onclick="togglePower()"><img id="power-button" src="https://i0.wp.com/oneminutemacman.com/wp-content/uploads/2018/06/powerbutton.png?fit=545%2C545&ssl=1" /></a>
-    
-    <div id="container">
-      <a id="close-link" onclick="closeApp()">&times;</a>
+		#fridge {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
 
-      <div class="temperature">
-        <button onclick="decreaseTemp()">-</button>
-        <img onclick="convertTemperature()" id="temperature" src="https://cdn-icons-png.flaticon.com/512/1247/1247791.png"> <span id="temperature-value"></span> <span id="temperature-type">&#8457;</span>
-        <button onclick="increaseTemp()">+</button>
-      </div>
+		#shopping-list {
+			margin-top: 1rem;
+			text-align: center;
+		}
 
-      <div id="time" onclick="convertTime()"></div>
-      <br>
-      <br>
+		#shopping-list ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
 
-      <img id="fridge-inside" src="https://www.naturefresh.ca/wp-content/uploads/How-To-Organize-Your-Fridge-InsideFridge-terraskitchen.jpg" />
-      <div id="browser"><img src="assets/images/google-screenshot.png" width="650px"/></div>
+		#shopping-list li {
+			padding: 0.5rem;
+			border-bottom: 1px solid #ccc;
+		}
 
-      <div id="youtube">
-        <iframe id="youtube-vid-iframe" width="850" height="450" src="" title="Billy Joel - Summer, Highland Falls 3/26/23 MSG Live" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>  
-      </div>
+		#shopping-list li:last-child {
+			border-bottom: none;
+		}
 
-      <div id="weather"></div>
+		#shopping-list input {
+			margin-top: 1rem;
+			padding: 0.5rem;
+		}
 
-      <div id="shopping-list">
-        <div class="header">
-          <h2>Shopping List</h2>
-          <input type="text" id="input-item" placeholder="Item...">
-          <span onclick="newElement()" class="add-button">Add</span>
-        </div>
-        
-        <ul id="shopping-list-items">
-          <li id="shopping-list-item" class="checked">Eggs</li>
-          <li id="shopping-list-item">Bananas</li>
-          <li id="shopping-list-item">Apples</li>
-          <li id="shopping-list-item">Cake</li>
-          <li id="shopping-list-item">Cookies</li>
-        </ul>
-      </div>
+		#shopping-list button {
+			margin-top: 1rem;
+			padding: 0.5rem;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
 
-      <div id="timer">
-        <span id="timer-elapsed">00:00</span>
+		#shopping-list button:hover {
+			background-color: #3e8e41;
+		}
 
-        <br>
-        <button onclick="decreaseTimer()">-</button>
-        <button onclick="increaseTimer()">+</button>
-        <br>
-        <button id="timer-start" onclick="startTimer()">Start</button>
-      </div>
+		#weather {
+			margin-top: 1rem;
+			text-align: center;
+		}
 
-      <div id="spotify">
-        <ul style="list-style-type: none;">
-          <li id="song">
-            Kitty's Back - Bruce Springsteen (Live in Philadelphia - 3/16/2023)
-            <audio id="player" controls>
-              <source src="assets/sounds/kittys-back.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </li>
-          <br>
-          <li id="song">
-            Ghosts - Bruce Springsteen (Live in Philadelphia - 3/16/2023)
-            <audio id="player" controls>
-              <source src="assets/sounds/ghosts.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </li>
+		#timer {
+			margin-top: 1rem;
+			text-align: center;
+		}
 
-          <br>
-          <li id="song">
-            Trapped - Bruce Springsteen (Live in Philadelphia - 3/16/2023)
-            <audio id="player" controls>
-              <source src="assets/sounds/trapped.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </li>
+		#music {
+			margin-top: 1rem;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Fridge App</h1>
+	<div id="container">
+		<div id="left">
+			<button id="onoff">Off</button>
+			<div id="time">12:00</div>
+			<img id="tv" width="350" height="350" src="https://static.india.com/wp-content/uploads/2023/04/Collage-Maker-12-Apr-2023-04-54-PM-2512.jpg?impolicy=Medium_Resize&w=1200&h=800">
+			<div id="browser"></div>
+		</div>
+		<div id="right">
+			<div id="fridge">
+				<div id="temperature"></div>
+				<div id="shopping-list">
+					<h2>Shopping List</h2>
+					<ul>
+						<li>Milk</li>
+						<li>Eggs</li>
+						<li>Bread</li>
+						<li>Cheese</li>
+						<li>Butter</li>
+					</ul>
+					<input type="text" id="item">
+					<button id="add-item">Add Item</button>
+				</div>
+				<div id="weather"></div>
+				<div id="timer">
+					<input type="number" id="minutes" min="1" max="60" step="1" value="5">
+					<button id="start-timer">Start</button>
+				</div>
+				<div id="music">
+					<button id="play-music">Play Music</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    </html>
 
-          <br>
-          <li id="song">
-            The Promised Land - Bruce Springsteen (Live in Philadelphia - 3/16/2023)
-            <audio id="player" controls>
-              <source src="assets/sounds/promised-land.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </li>
+	<script>
+		// Variables
+        // Variables
+        let isOn = false;
+        let timeFormat24h = true;
+        let temperature =  Math.floor(Math.random() * 30) + 1;
+        let temperatureUnit = 'C';
 
-          <br>
-          <li id="song">
-            Thunder Road - Bruce Springsteen (Live in Philadelphia - 3/16/2023)
-            <audio id="player" controls>
-              <source src="assets/sounds/thunder-road.mp3" type="audio/mpeg">
-              Your browser does not support the audio element.
-            </audio>
-          </li>
-        </ul>
-        
-      </div>
+        // Elements
+        const onoffBtn = document.getElementById('onoff');
+        const timeEl = document.getElementById('time');
+        const tvEl = document.getElementById('tv');
+        const browserEl = document.getElementById('browser');
+        const temperatureEl = document.getElementById('temperature');
+        const addItemInput = document.getElementById('item');
+        const addItemBtn = document.getElementById('add-item');
+        const weatherEl = document.getElementById('weather');
+        const minutesInput = document.getElementById('minutes');
+        const startTimerBtn = document.getElementById('start-timer');
+        const musicBtn = document.getElementById('play-music');
 
-      <table class="apps">
-        <tr>
-          <td>
-            <a onclick="openApp('seeInside')"><img class="app-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAqFBMVEX///8stMSAfn0mHxs/4N4wJyQsusselLEvKSYvPj74+Pgss8QuODodmbcwIh4oqr41bWtA5+Uvu8gfFRAvGhc5mpjNzMsnZnfp6egwNDIvaW9DSk8yRUIvwtArJCE7PD6/vr0aEAmMiYhB7+1JREK+vbwjGxc7PD1BOzlxbm1PS0iPjYw2MC0VCQAthpEtk58uWFwwFg0wDgAspLIudn8vSEqysK/b2tooVWxHAAACu0lEQVR4nO3d7VLaQBSAYTAuLhDT2rRptBABNY0SqB9V7v/OGqVUwzhtbE85y/I+/tJxmX3JuAO4k221AAAAAAAAAAAAAAAAAAC7qSdHO+U1vWkZyymnzkWmeW4l5XmqnbSmyKz5KMfYrNBOqruY2WjwSc4gsrML7aiaSW7M/pGcfWPziXZUzV5gBkf7co4GJtjTjqrZjcJhX87QxcJupy2n06Vw0yikkEJ9FFK4G4Xzb34Xdq5vbue/HsLLwmMTnVCoiEIKKdRHIYUU6qOQQgr1CRSG3hfOb6O75+88LGx32i8ewMvCei6FG0chhRTqo5DC7Sh8J8nFwvDwQM5hSOGmPRVKcrDQ2lCStQ4WGklOFkaSXCw8fi/p2L1CMzgT3EF75uLexB3YX3omWOjkNewOP8gZuviqrdsR3CPs5itv/99bUEghhboopJBCfRRS+FTl+/+A765P/C7s3Ec33/3ei+H/fhoKlVFIIYX6KKSQQn0UUrgThV3f3z217+6v+y96PSz0/1OMei2FG0chhRTqo5BCCvVRSCGF+iikkEJ9FFJIoT4KKaRQH4UUUqiPQgq3ojDs/3nijfUdvKfCTtwXw+vCSWCjA8EbfxxErp1oNZpZE36WExo7G2lH1Z0H1gjeFsPY4Fw7aU2axZng4YBZbF07HbDVmxb5WmTQ9DzHPFjLywv3Tnhcqhac8suStXHz4/0uYmt/jitt4NYSU1crHI8ajxuNt6Vwmq9meloVJo3HJVXh6eqZyaf/cYb/Jk0fqpmWX0+rr+rPabZIm1rMqt9/GldWz8xD6twqs5RUiue1Jr9Mmrt8Pqc1Kx5/oB3zmt7jxEZZsFoPr94QmCRXq3U4yEauFrYWy6tRxuPxOC4mbwpMkknxOG5sl1d+oR3zW397KLOzhzkDAAAAAAAAAAAAAAAAADbnB7S+1Yheigg1AAAAAElFTkSuQmCC"></a>
-            <br>
-            See Inside
-          </td>
+        // Functions
+        function toggleOnOff() {
+            isOn = !isOn;
+            if (isOn) {
+                onoffBtn.textContent = 'On';
+                tvEl.src = 'tv-on.png';
+                playSound('tv-on.mp3');
+            } else {
+                onoffBtn.textContent = 'Off';
+                tvEl.src = 'tv-off.png';
+            }
+        }
 
-          <td>
-            <a onclick="openApp('browser')"><img class="app-icon" src="https://icons.iconarchive.com/icons/bokehlicia/pacifica/256/browser-google-chrome-icon.png"></a>
-            <br>
-            Google Chrome
-          </td>
+        function toggleTimeFormat() {
+            timeFormat24h = !timeFormat24h;
+            const date = new Date();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            timeEl.textContent = formatTime(hours, minutes);
+        }
 
-          <td>
-            <a onclick="openApp('youtube')"><img class="app-icon" src="assets/images/youtube.png"></a>
-            <br>
-            YouTube
-          </td>
+        function formatTime(hours, minutes) {
+            if (timeFormat24h) {
+                return padZero(hours) + ':' + padZero(minutes);
+            } else {
+                let ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                return hours + ':' + padZero(minutes) + ' ' + ampm;
+            }
+        }
 
-          <td>
-            <a onclick="openApp('spotify')"><img class="app-icon" src="assets/images/spotify.jpg"></a>
-            <br>
-            Spotify
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a onclick="openApp('weather')"><img class="app-icon" src="assets/images/weather.png"></a>
-            <br>
-            Weather
-          </td>
+        function padZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
 
-          <td>
-            <a onclick="openApp('shopping-list')"><img class="app-icon" src="assets/images/shopping-list.webp"></a>
-            <br>
-            Shopping List
-          </td>
+        function toggleTemperatureUnit() {
+            if (temperatureUnit === 'C') {
+                temperatureUnit = 'F';
+                temperature = Math.round(temperature * 9/5 + 32);
+            } else {
+                temperatureUnit = 'C';
+                temperature = Math.round((temperature - 32) * 5/9);
+            }
+            updateTemperature();
+        }
 
-          <td>
-            <a onclick="openApp('timer')"><img class="app-icon" src="assets/images/timer.png"></a>
-            <br>
-            Timer
-          </td>
-        </tr>
-      </table>
-    </div>
+        function updateTemperature() {
+            temperatureEl.textContent = temperature + '°' + temperatureUnit;
+        }
 
-    <script type="text/javascript" src="scripts/time-handler.js"></script>
-    <script type="text/javascript" src="scripts/shopping-list.js"></script>
-    <script type="text/javascript" src="scripts/temp-handler.js"></script>
-    <script type="text/javascript" src="scripts/weather-handler.js"></script>
-    <script type="text/javascript" src="scripts/apps.js"></script>
-    <script type="text/javascript" src="scripts/index.js"></script>
-  </body>
-</html>
+        function increaseTemperature() {
+            temperature++;
+            updateTemperature();
+        }
+
+        function decreaseTemperature() {
+            temperature--;
+            updateTemperature();
+        }
+
+        function addItem() {
+            const item = addItemInput.value;
+            if (item.trim() !== '') {
+                const li = document.createElement('li');
+                li.textContent = item;
+                const ul = document.querySelector('#shopping-list ul');
+                ul.appendChild(li);
+                addItemInput.value = '';
+            }
+        }
+
+        function getWeather() {
+            weatherEl.textContent = 'Loading...';
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=London,uk&units=metric&appid=YOUR_API_KEY')
+                .then(response => response.json())
+                .then(data => {
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+                    const weather = `${description}, ${temperature}°C`;
+                    weatherEl.textContent = weather;
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    weatherEl.textContent = 'Error fetching weather data';
+                });
+        }
+
+        function startTimer() {
+            const minutes = minutesInput.value;
+            const seconds = minutes * 60;
+            let timeLeft = seconds;
+
+            const interval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const interval = setInterval(function () {
+                    const date = new Date();
+                    timeEl.textContent = formatTime(date);
+                    }, 1000);
+            }
+        }
+        // Set initial temperature display
+temperatureEl.textContent = `${temperature}°${temperatureUnit}`;
+
+// Increase temperature button
+document.getElementById("increaseTemp").addEventListener("click", function () {
+  temperature++;
+  temperatureEl.textContent = `${temperature}°${temperatureUnit}`;
+});
+
+// Decrease temperature button
+document.getElementById("decreaseTemp").addEventListener("click", function () {
+  temperature--;
+  temperatureEl.textContent = `${temperature}°${temperatureUnit}`;
+});
+
+// Toggle temperature unit button
+temperatureEl.addEventListener("click", function () {
+  if (temperatureUnit === "C") {
+    temperatureUnit = "F";
+    temperature = Math.round((temperature * 9 / 5) + 32);
+  } else {
+    temperatureUnit = "C";
+    temperature = Math.round((temperature - 32) * 5 / 9);
+  }
+  temperatureEl.textContent = `${temperature}°${temperatureUnit}`;
+});
+
+// Shopping list
+const shoppingList = document.getElementById("shoppingList");
+const shoppingListForm = document.getElementById("shoppingListForm");
+const shoppingListInput = document.getElementById("shoppingListInput");
+const shoppingListBtn = document.getElementById("shoppingListBtn");
+
+shoppingListBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  const item = shoppingListInput.value.trim();
+  if (item !== "") {
+    const li = document.createElement("li");
+    li.textContent = item;
+    shoppingList.appendChild(li);
+    shoppingListInput.value = "";
+  }
+});
+
+// Weather
+const weatherEl = document.getElementById("weather");
+
+fetch("https://api.openweathermap.org/data/2.5/weather?q=New%20York&appid=YOUR_API_KEY")
+  .then((response) => response.json())
+  .then((data) => {
+    const temperature = Math.round(data.main.temp - 273.15);
+    const description = data.weather[0].description;
+    weatherEl.textContent = `Weather: ${description}, ${temperature}°C`;
+  })
+  .catch((error) => {
+    console.log(error);
+    weatherEl.textContent = "Weather: Error fetching data";
+  });
+
+// Timer
+const minuteTimerEl = document.getElementById("minuteTimer");
+const minuteTimerForm = document.getElementById("minuteTimerForm");
+const minuteTimerInput = document.getElementById("minuteTimerInput");
+const minuteTimerBtn = document.getElementById("minuteTimerBtn");
+const timerAudio = new Audio("timer-sound.mp3");
+
+minuteTimerBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  const minutes = Number(minuteTimerInput.value);
+  if (!Number.isNaN(minutes)) {
+    minuteTimerForm.style.display = "none";
+    minuteTimerEl.textContent = `${minutes}:00`;
+    let seconds = 0;
+    timerInterval = setInterval(function () {
+      seconds--;
+      if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+          clearInterval(timerInterval);
+          timerAudio.play();
+        } else {
+          minuteTimerEl.textContent = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+        }
+      } else {
+        minuteTimerEl.textContent = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+      }
+    }, 1000);
+  }
+});
+
+// Music player
+// Music player
+const musicPlayerContainer = document.getElementById('music-player-container');
+const musicPlayer = document.getElementById('music-player');
+const playBtn = document.getElementById('play-btn');
+const stopBtn = document.getElementById('stop-btn');
+const closeBtn = document.getElementById('close-btn');
+
+musicPlayerBtn.addEventListener('click', function() {
+  musicPlayerContainer.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', function() {
+  musicPlayerContainer.style.display = 'none';
+});
+
+playBtn.addEventListener('click', function() {
+  musicPlayer.play();
+});
+
+stopBtn.addEventListener('click', function() {
+  musicPlayer.pause();
+  musicPlayer.currentTime = 0;
+});
+
 
 
