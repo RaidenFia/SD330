@@ -1,0 +1,19 @@
+nav {
+    border-bottom: 1px solid black;
+  }
+  
+  .crumbs ol {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .breadcrumbs {
+    display: inline-block;
+  }
+  
+  .crumb  {
+    display: inline-block;
+    color: black;
+    content: '>';
+    font-size: 80%;
+  }
