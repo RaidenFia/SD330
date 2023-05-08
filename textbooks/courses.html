@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<nav class="crumbs">
+  <img src="bookstoreLogo.jpg" alt="bookstore logo" width="150" height="50">
+  <br>
+  <ol>
+    <li class="crumb"><a href="finalProject.html"> Home</a></li>
+    <li class="crumb"><a href="courses.html"> Courses</a></li>
+
+  </ol>
+  <div class="topnav">
+    
+    <div class="search-container">
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<body>
+  <h1>Courses</h1>
+  <!-- Create buttons that link to settings, account page, and reset page -->
+
+ 
+  <script>
+    async function getCourses() {
+      let htmlString = "<h2>Here are the list of available courses</h2><p>";
+      const response = await fetch("https://raw.githubusercontent.com/hduale13/SD330/main/project3.json");
+      const data = await response.json();
+  
+      htmlString += "<p>Here are the elements of <b>courses</b>:</p>";
+  
+      let courses = Object.keys(data['courses']); // Array for courses
+  
+      for (const i in courses) {
+        const courseLink = `<a href="books.html?course=${courses[i]}">${courses[i]}</a>`;
+        htmlString += " " + courseLink;
+      }
+  
+      document.body.innerHTML += htmlString;
+    }
+  
+    getCourses();
+  </script>
+
+ 
+
+</body>
+
+</html>
