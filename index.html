@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <title> Raiden Fia SD330</title>
+    </head>
+    <style>
+        body {
+            background-image: url("https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?cs=srgb&dl=pexels-pixabay-235985.jpg&fm=jpg");
+            color: white;
+        }
+    </style>
+    <body onload="fileList()">
+        <div>
+            <img src = "https://images.gofundme.com/LR3jQpii5GA5yH92iK-YxD6J_cQ=/720x405/https://d2g8igdw686xgo.cloudfront.net/49702658_1594931440629722_r.jpeg">
+            <h1 style = "color: white;"> Raiden Fia, SD330 Files.</h1>  
+        </div>
+        <br>
+        <p> My files:</p>
+
+        <p id="files">
+        
+        </p>
+
+    
+           <script>
+                fileList();
+
+                async function fileList() {
+                    const response = await fetch(new Request("https://api.github.com/repos/raidenfia/SD330/contents/"));
+                    const data = await response.json();
+
+                    let htmlString = "";
+                    for (let file of data) {
+                        let fname = file.name;
+                        let ftype = file.type;
+                        fpath = "https://raidenfia.github.io/SD330/" + fname;
+
+                        htmlString += "<tr> <td class='fileBox'>";
+                        htmlString += "<p class='pageName'> <a href='" + encodeURI(fpath) + "' target='_blank'>" + fname;
+                        
+                        if (ftype == 'dir') {
+                            htmlString += " <small>(directory)</small>";
+                        }
+
+                        htmlString += "<p class='pageLink'>" + encodeURI(fpath);
+                        htmlString += "</td> </tr>";
+                    }
+
+                    document.getElementById('files').innerHTML = htmlString;
+                }
+                
+            </script>
+             <footer>
+                <hr>
+                <p style='text-align:center'></p>
+                <small> &#169 Raiden Fia, 2/3/2023 </small>
+            </footer>
+
+    </body>
