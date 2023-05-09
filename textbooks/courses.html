@@ -1,58 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <link rel="stylesheet" href="style.css">
+	<title>FoxBooks | Courses</title>
+	<link rel="stylesheet" type="text/css" href="textbookstyle.css">
 </head>
-
-
-<nav class="crumbs">
-  <img src="bookstoreLogo.jpg" alt="bookstore logo" width="150" height="50">
-  <br>
-  <ol>
-    <li class="crumb"><a href="finalProject.html"> Home</a></li>
-    <li class="crumb"><a href="courses.html"> Courses</a></li>
-
-  </ol>
-  <div class="topnav">
-    
-    <div class="search-container">
-      <form action="/action_page.php">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
-    </div>
-  </div>
-</nav>
-
-
 <body>
-  <h1>Courses</h1>
-  <!-- Create buttons that link to settings, account page, and reset page -->
+	<header>
+		<nav>
+			<ul>
+				<li><a href="homepage.html">Home</a></li>
+				<li><a href="textbooks.html">Books</a></li>
+				<li><a href="courses.html">Courses</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section id="breadcrumb">
+		<p>You are here: <a href="homepage.html">Home</a> &raquo; <strong>Courses</strong></p>
+	</section>
+	<main>
+		<section id="courses">
+			<h2>Our Courses</h2>
+			<ul>
+			</ul>
+		</section>
+	</main>
+	</footer>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+    fetch('textbook.json')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            const coursesList = document.querySelector('courses');
+            const coursesData = data.coursesTypes;
 
- 
-  <script>
-    async function getCourses() {
-      let htmlString = "<h2>Here are the list of available courses</h2><p>";
-      const response = await fetch("https://raw.githubusercontent.com/hduale13/SD330/main/project3.json");
-      const data = await response.json();
-  
-      htmlString += "<p>Here are the elements of <b>courses</b>:</p>";
-  
-      let courses = Object.keys(data['courses']); // Array for courses
-  
-      for (const i in courses) {
-        const courseLink = `<a href="books.html?course=${courses[i]}">${courses[i]}</a>`;
-        htmlString += " " + courseLink;
-      }
-  
-      document.body.innerHTML += htmlString;
-    }
-  
-    getCourses();
-  </script>
+            for (const courseCode in coursesData) {
+                if (coursesData.hasOwnProperty(courseCode)) {
+                    const course = coursesData[courseCode];
+                    const li = document.createElement('li');
+                    const h3 = document.createElement('h3');
+                    const p1 = document.createElement('p');
+                    const p2 = document.createElement('p');
 
- 
+                    h3.textContent = `${course.ID} - ${courseCode}`;
+                    p1.textContent = `Professor: ${course.Professor}`;
+                    p2.textContent = `Semester: ${course.semester}`;
 
+                    li.appendChild(h3);
+                    li.appendChild(p1);
+                    li.appendChild(p2);
+                    coursesList.appendChild(li);
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(`Error loading data: ${error}`);
+        });
+});
+	</script>
 </body>
-
 </html>
