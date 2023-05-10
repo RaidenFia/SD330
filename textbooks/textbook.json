@@ -1,13 +1,13 @@
 {
-    "courses": [
-      {
-        "Id": "1",
-        "course": "CMPT330",
-        "courseName": "System Design",
-        "section": "111",
-        "professor": "Andrew Tokash",
-        "semester": "Spring 2023"
-      },
+  "courses": [
+    {
+      "Id": "1",
+      "course": "CMPT330",
+      "courseName": "System Design",
+      "section": "111",
+      "professor": "Andrew Tokash",
+      "semester": "Spring 2023"
+    },
       {
         "Id": "2",
         "course": "CMPT420",

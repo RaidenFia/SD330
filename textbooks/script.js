@@ -1,57 +1,64 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Load the books data from JSON file
-    fetch('textbook.json')
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        // Get the list of featured books
-        const featuredBooks = document.getElementById('books-list');
-        const books = data.books;
-  
-        // Iterate through the books and add them to the featured books list
-        for (const bookTitle in books) {
-          if (books.hasOwnProperty(bookTitle)) {
-            const book = books[bookTitle];
-            const li = document.createElement('li');
-            const img = document.createElement('img');
-            const h3 = document.createElement('h3');
-            const p = document.createElement('p');
-  
-            img.src = `images/${book.ISBN}.jpg`;
-            img.alt = bookTitle;
-            h3.textContent = bookTitle;
-            p.textContent = book.Author;
-  
-            li.appendChild(img);
-            li.appendChild(h3);
-            li.appendChild(p);
-            featuredBooks.appendChild(li);
-          }
-        }
-  
-        // Get the list of courses
-        const courses = document.getElementById('courses-list');
-        const courseTypes = data.coursesTypes;
-  
-        // Iterate through the course types and add them to the courses list
-        for (const courseCode in courseTypes) {
-          if (courseTypes.hasOwnProperty(courseCode)) {
-            const course = courseTypes[courseCode];
-            const li = document.createElement('li');
-            const h3 = document.createElement('h3');
-            const p = document.createElement('p');
-  
-            h3.textContent = `${courseCode} - ${course.ID}`;
-            p.textContent = `Professor: ${course.Professor}, Semester: ${course.semester}`;
-  
-            li.appendChild(h3);
-            li.appendChild(p);
-            courses.appendChild(li);
-          }
-        }
-      })
-      .catch(function(error) {
-        console.log(`Error loading data: ${error}`);
-      });
+// JavaScript (script.js)
+// Fetch the JSON data from the file
+fetch('textbook.json')
+  .then(response => response.json())
+  .then(data => {
+    const tableBody = document.querySelector('#myTable tbody');
+
+    // Iterate over the courses and create table rows
+    data.courses.forEach(course => {
+      const row = document.createElement('tr');
+
+      const idCell = document.createElement('td');
+      idCell.textContent = course.Id;
+      row.appendChild(idCell);
+
+      const courseCell = document.createElement('td');
+      courseCell.textContent = course.course;
+      row.appendChild(courseCell);
+
+      const nameCell = document.createElement('td');
+      nameCell.textContent = course.courseName;
+      row.appendChild(nameCell);
+
+      const sectionCell = document.createElement('td');
+      sectionCell.textContent = course.section;
+      row.appendChild(sectionCell);
+
+      const professorCell = document.createElement('td');
+      professorCell.textContent = course.professor;
+      row.appendChild(professorCell);
+
+      const semesterCell = document.createElement('td');
+      semesterCell.textContent = course.semester;
+      row.appendChild(semesterCell);
+
+      tableBody.appendChild(row);
+    });
+
+    // Iterate over the books and create table rows
+    data.books.forEach(book => {
+      const row = document.createElement('tr');
+
+      const idCell = document.createElement('td');
+      idCell.textContent = book.Id;
+      row.appendChild(idCell);
+
+      const titleCell = document.createElement('td');
+      titleCell.textContent = book.title;
+      row.appendChild(titleCell);
+
+      const authorCell = document.createElement('td');
+      authorCell.textContent = book.author;
+      row.appendChild(authorCell);
+
+      const publisherCell = document.createElement('td');
+      publisherCell.textContent = book.publisher;
+      row.appendChild(publisherCell);
+
+      tableBody.appendChild(row);
+    });
+  })
+  .catch(error => {
+    console.log('Error:', error);
   });

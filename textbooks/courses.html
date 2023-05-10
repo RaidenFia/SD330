@@ -15,49 +15,86 @@
 		</nav>
 	</header>
 	<section id="breadcrumb">
-		<p>You are here: <a href="index.html">Home</a> &raquo; <strong>Courses</strong></p>
+		<p>Click here to return to the homepage: <a href="index.html">Home</a> &raquo; <strong>Courses</strong></p>
 	</section>
-	<main>
-		<section id="courses">
-			<h2>Our Courses</h2>
-			<ul>
-			</ul>
-		</section>
-	</main>
-	</footer>
-	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-    fetch('textbook.json')
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            const coursesList = document.querySelector('courses');
-            const coursesData = data.coursesTypes;
+    <p style="text-align: center; font-size: larger;" > Courses offered</p>
+    <table id="myTable">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Course</th>
+            <th>Course Name</th>
+            <th>Section</th>
+            <th>Professor</th>
+            <th>Semester</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <script>
+            fetch('textbook.json')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#myTable tbody');
 
-            for (const courseCode in coursesData) {
-                if (coursesData.hasOwnProperty(courseCode)) {
-                    const course = coursesData[courseCode];
-                    const li = document.createElement('li');
-                    const h3 = document.createElement('h3');
-                    const p1 = document.createElement('p');
-                    const p2 = document.createElement('p');
+                // Iterate over the courses and create table rows
+                data.courses.forEach(course => {
+                const row = document.createElement('tr');
 
-                    h3.textContent = `${course.ID} - ${courseCode}`;
-                    p1.textContent = `Professor: ${course.Professor}`;
-                    p2.textContent = `Semester: ${course.semester}`;
+                const idCell = document.createElement('td');
+                idCell.textContent = course.Id;
+                row.appendChild(idCell);
 
-                    li.appendChild(h3);
-                    li.appendChild(p1);
-                    li.appendChild(p2);
-                    coursesList.appendChild(li);
-                }
-            }
-        })
-        .catch(function(error) {
-            console.log(`Error loading data: ${error}`);
-        });
-});
-	</script>
+                const courseCell = document.createElement('td');
+                courseCell.textContent = course.course;
+                row.appendChild(courseCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = course.courseName;
+                row.appendChild(nameCell);
+
+                const sectionCell = document.createElement('td');
+                sectionCell.textContent = course.section;
+                row.appendChild(sectionCell);
+
+                const professorCell = document.createElement('td');
+                professorCell.textContent = course.professor;
+                row.appendChild(professorCell);
+
+                const semesterCell = document.createElement('td');
+                semesterCell.textContent = course.semester;
+                row.appendChild(semesterCell);
+
+                tableBody.appendChild(row);
+                });
+
+                // Iterate over the books and create table rows
+                data.books.forEach(book => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = book.Id;
+                row.appendChild(idCell);
+
+                const titleCell = document.createElement('td');
+                titleCell.textContent = book.title;
+                row.appendChild(titleCell);
+
+                const authorCell = document.createElement('td');
+                authorCell.textContent = book.author;
+                row.appendChild(authorCell);
+
+                const publisherCell = document.createElement('td');
+                publisherCell.textContent = book.publisher;
+                row.appendChild(publisherCell);
+
+                tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+
+      </script>
 </body>
 </html>

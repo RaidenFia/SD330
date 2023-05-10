@@ -1,7 +1,7 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    background-color: white;
+    background-color: violet;
 }
 
 header {
@@ -24,39 +24,40 @@ nav li {
 
 nav a {
     display: block;
-    color: white;
+    color: black;
     text-decoration: none;
     font-size: 18px;
 }
 
 nav a:hover {
-    color: white;
+    color: black;
 }
 
 #banner {
-    background-color: white;
-    color: white;
+    background-color: violet;
+    color: black;
     text-align: center;
     padding: 50px;
 }
 
 #banner h1 {
-    margin-top: 0;
+    text-align: center;
 }
 
 #breadcrumb {
-    background-color: #d90000;
-    color: white;
+    background-color: red;
+    color: black;
     padding: 10px;
+    text-align: center;
 }
 
 #breadcrumb a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 #services {
-    background-color: white;
+    background-color: violet;
     padding: 50px;
     text-align: center;
 }
@@ -87,36 +88,8 @@ nav a:hover {
 }
 
 #featured-books {
-    background-color: white;
+    background-color: violet;
     padding: 50px;
     text-align: center;
 }
 
-#featured-books h2 {
-    margin-top: 0;
-}
-
-#featured-books ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#featured-books li {
-    display: inline-block;
-    margin-right: 20px;
-    width: 30%;
-    text-align: left;
-}
-
-#featured-books li h3 {
-    margin-top: 0;
-}
-
-#featured-books li p {
-    margin-bottom: 0;
-}
-
-#featured-books li img {
-    width: 100%;
-}

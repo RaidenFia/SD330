@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>FoxBooks | Home</title>
+	<title> Foxbooks Homepage</title>
 	<link rel="stylesheet" type="text/css" href="textbookstyle.css">
 </head>
 <body>
@@ -25,90 +25,21 @@
 	
 	
 		<section id="services">
-			<h2>Our Services</h2>
+			<h2>Services provided</h2>
 			<ul>
 				<li>
 					<h3>Textbooks</h3>
-					<p>We have a wide selection of textbooks for all your classes.</p>
+					<p>Textbooks needed for this semester.</p>
 				</li>
 				<li>
 					<h3>Courses</h3>
-					<p>See what courses you have this semester.</p>
+					<p>See what courses you have and whose teaching it.</p>
 				</li>
 				<li>
 					<h3>Course Materials</h3>
-					<p>From lab coats to art supplies, we have everything you need for your courses.</p>
+					<p>Any miscellanious supplies that you might need.</p>
 				</li>
 			</ul>
 		</section>
-	
-		<section id="featured-books">
-			<h2>Featured Books</h2>
-			<ul id="books-list">
-			</ul>
-		</section>
-
-		<section id="featured-courses">
-			<h2>Featured Courses</h2>
-			<ul id="courses-list">
-			</ul>
-		</section>
-	</main>
-	
-    <script>
-		document.addEventListener('DOMContentLoaded', function() {
-  fetch('textbook.json')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      const featuredBooks = document.getElementById('books-list');
-      const books = data.books;
-
-      for (const booktitle in books) {
-        if (books.hasOwnProperty(bookTitle)) {
-          const book = books[bookTitle];
-          const li = document.createElement('li');
-          const img = document.createElement('img');
-          const h3 = document.createElement('h3');
-          const p = document.createElement('p');
-
-          img.src = `images/${book.ISBN}.jpg`;
-          img.alt = bookTitle;
-          h3.textContent = bookTitle;
-          p.textContent = book.Author;
-
-          li.appendChild(img);
-          li.appendChild(h3);
-          li.appendChild(p);
-          featuredBooks.appendChild(li);
-        }
-      }
-
-      const courses = document.getElementById('courses-list');
-      const courseTypes = textbooks.coursestypes;
-
-      for (const courseId in courseId) {
-        if (courseTypes.hasOwnProperty(courseCode)) {
-          const course = courseTypes[courseCode];
-          const li = document.createElement('li');
-          const h3 = document.createElement('h3');
-          const p = document.createElement('p');
-
-          h3.textContent = `${courseCode} - ${course.ID}`;
-          p.textContent = `Professor: ${course.Professor}, Semester: ${course.semester}`;
-
-          li.appendChild(h3);
-          li.appendChild(p);
-          courses.appendChild(li);
-        }
-      }
-    })
-    .catch(function(error) {
-      console.log(`Error loading data: ${error}`);
-    });
-});
-
-	</script>
 </body>
 </html>
