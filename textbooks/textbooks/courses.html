@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FoxBooks | Courses</title>
+	<link rel="stylesheet" type="text/css" href="textbookstyle.css">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="textbooks.html">Books</a></li>
+				<li><a href="courses.html">Courses</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section id="breadcrumb">
+		<p>Click here to return to the homepage: <a href="index.html">Home</a> &raquo; <strong>Courses</strong></p>
+	</section>
+    <p style="text-align: center; font-size: larger;" > Courses offered</p>
+    <table id="myTable">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Course</th>
+            <th>Course Name</th>
+            <th>Section</th>
+            <th>Professor</th>
+            <th>Semester</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <script>
+            fetch('textbook.json')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector('#myTable tbody');
+
+                // Iterate over the courses and create table rows
+                data.courses.forEach(course => {
+                const row = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = course.Id;
+                row.appendChild(idCell);
+
+                const courseCell = document.createElement('td');
+                courseCell.textContent = course.course;
+                row.appendChild(courseCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = course.courseName;
+                row.appendChild(nameCell);
+
+                const sectionCell = document.createElement('td');
+                sectionCell.textContent = course.section;
+                row.appendChild(sectionCell);
+
+                const professorCell = document.createElement('td');
+                professorCell.textContent = course.professor;
+                row.appendChild(professorCell);
+
+                const semesterCell = document.createElement('td');
+                semesterCell.textContent = course.semester;
+                row.appendChild(semesterCell);
+
+                tableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+
+      </script>
+</body>
+</html>

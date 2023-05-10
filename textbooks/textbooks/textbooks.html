@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    
+    <html>
+    <head>
+        <title>Books</title>
+        <link rel="stylesheet" type="text/css" href="textbookstyle.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="textbooks.html">Books</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section id="breadcrumb">
+            <p>Click here to return back to the homepage <a href="index.html">Home</a> &raquo; <strong>Books</strong></p>
+        </section>
+        <main>
+            <section id="books">
+                <h2 style="text-align: center; font-size: larger;" >Books offered</h2>
+                <table id="myTable">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Publisher</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+            </section>
+        </main>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch('textbook.json')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#myTable tbody');
+
+                    // Iterate over the books and create table rows
+                    data.books.forEach(book => {
+                    const row = document.createElement('tr');
+
+                    const idCell = document.createElement('td');
+                    idCell.textContent = book.Id;
+                    row.appendChild(idCell);
+
+                    const titleCell = document.createElement('td');
+                    titleCell.textContent = book.title;
+                    row.appendChild(titleCell);
+
+                    const authorCell = document.createElement('td');
+                    authorCell.textContent = book.author;
+                    row.appendChild(authorCell);
+
+                    const publisherCell = document.createElement('td');
+                    publisherCell.textContent = book.publisher;
+                    row.appendChild(publisherCell);
+
+                    tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                });
+        });
+        </script>
+    </body>
+</html>

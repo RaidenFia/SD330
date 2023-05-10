@@ -1,0 +1,95 @@
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: violet;
+}
+
+header {
+    background-color: red;
+    color: white;
+    padding: 10px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    color: black;
+}
+
+#banner {
+    background-color: violet;
+    color: black;
+    text-align: center;
+    padding: 50px;
+}
+
+#banner h1 {
+    text-align: center;
+}
+
+#breadcrumb {
+    background-color: red;
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+#breadcrumb a {
+    color: black;
+    text-decoration: none;
+}
+
+#services {
+    background-color: violet;
+    padding: 50px;
+    text-align: center;
+}
+
+#services h2 {
+    margin-top: 0;
+}
+
+#services ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#services li {
+    display: inline-block;
+    margin-right: 20px;
+    width: 30%;
+    text-align: left;
+}
+
+#services li h3 {
+    margin-top: 0;
+}
+
+#services li p {
+    margin-bottom: 0;
+}
+
+#featured-books {
+    background-color: violet;
+    padding: 50px;
+    text-align: center;
+}
+

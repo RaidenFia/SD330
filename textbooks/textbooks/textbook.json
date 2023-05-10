@@ -1,0 +1,99 @@
+{
+  "courses": [
+    {
+      "Id": "1",
+      "course": "CMPT330",
+      "courseName": "System Design",
+      "section": "111",
+      "professor": "Andrew Tokash",
+      "semester": "Spring 2023"
+    },
+      {
+        "Id": "2",
+        "course": "CMPT420",
+        "courseName": "Internet Security",
+        "section": "111",
+        "professor": "Robert Cannistra",
+        "semester": "Spring 2023"
+      },
+      {
+        "Id": "3",
+        "course": "ECON303",
+        "courseName": "Intermediate Microeconomic Theory",
+        "section": "111",
+        "professor": "Della Sue",
+        "semester": "Spring 2023"
+      },
+      {
+        "Id": "4",
+        "course": "MATH241",
+        "courseName": "Calculus 1",
+        "section": "114",
+        "professor": "Scott Frank",
+        "semester": "Spring 2023"
+      },
+      {
+        "Id": "5",
+        "course": "PHIL346",
+        "courseName": "Bioethics",
+        "section": "200",
+        "professor": "Stephen Miller",
+        "semester": "Spring 2023"
+      },
+      {
+        "Id": "6",
+        "course": "CMPT307",
+        "courseName": "Internetworking",
+        "section": "111",
+        "professor": "Andrew Tokash",
+        "semester": "Spring 2023"
+      }
+    ],
+
+    "books": [
+        { 
+            "title": "Interaction Design: Beyond Human-Computer Interaction: 5th edition",
+            "author": "Sharp, Helen",
+            "publisher": "Wiley",
+            "Id": "1"
+
+        },
+
+        {
+            "title": "CCNA 200-301 Volume 1 & 2",
+            "author": "Lammle, Todd",
+            "publisher": "Cisco Press",
+            "Id": "2"
+
+        },
+
+        {
+          "title": "Microeconomics: Theory & Practice 13th edition",
+          "author": "Edgar Browning, Mark Zupan",
+          "publisher": "Wiley",
+          "Id": "3"
+
+        },
+
+        {
+          "title": "Calculus: Early Trancendentals, 9th edition.",
+          "author": "Stewart",
+          "publisher": "Brooks/Cole",
+          "Id": "4"
+
+        },
+
+
+
+        {
+          "title": "Bioethics",
+          "author": "Lewis Vaughn",
+          "publisher": "Oxford University Press",
+          "Id": "5"
+        }
+
+        
+    ]
+
+  }
+  
